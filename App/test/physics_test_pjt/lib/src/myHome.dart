@@ -12,12 +12,14 @@ class HomeHourglassPage extends StatefulWidget {
 class _HomeHourglassPageState extends State<HomeHourglassPage> {
   @override
   Widget build(BuildContext context) {
-    final game = MyGame();
+    final screenSize = MediaQuery.of(context).size;
+    final gameSize = Vector2(screenSize.width, screenSize.height);
+
 
     return Scaffold(
       body: Center(
         child: GameWidget(
-          game: game,
+          game: MyGame(screenSize: gameSize),
         )
       ),
     );
