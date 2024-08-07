@@ -59,7 +59,7 @@ class GlassBall extends BodyComponent with HasGameRef<Forge2DGame> {
     }
 
     // 각속도를 멈추는 로직
-    if (body.linearVelocity.length < 0.1) {
+    if (body.linearVelocity.length < 0.1 && body.angularVelocity.abs() < 0.1) {
       body.linearVelocity = Vector2.zero();
       body.angularVelocity = 0;
     }
@@ -73,12 +73,12 @@ class GlassBall extends BodyComponent with HasGameRef<Forge2DGame> {
     );
     final shape = CircleShape()..radius =  radius  - collisionMargin; // 충돌 마진 적용; // 충돌 감지 경계
     final fixtureDef = FixtureDef(shape)
-      ..density = 0.5// 밀도 (값이 높을 수록 무겁다)
+      ..density = 10// 밀도 (값이 높을 수록 무겁다)
       ..friction = 0.3 // 마찰력
-      ..restitution = 0.2; // 반발력
+      ..restitution = 0.5; // 반발력
     return world.createBody(bodyDef)
       ..createFixture(fixtureDef)
-      ..angularVelocity = radians(60);
+      ..angularVelocity = radians(5);
   }
 }
 
